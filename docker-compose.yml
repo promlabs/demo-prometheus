@@ -1,0 +1,51 @@
+version: '3.2'
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+    - '0.0.0.0:9090:9090'
+    command:
+    - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+    - ./prometheus:/etc/prometheus
+  demo-service-0:
+    image: julius/prometheus-demo-service:latest
+    ports:
+    - '0.0.0.0:10000:10000'
+    command:
+    - -listen-address=:10000
+  demo-service-1:
+    image: julius/prometheus-demo-service:latest
+    ports:
+    - '0.0.0.0:10001:10001'
+    command:
+    - -listen-address=:10001
+  demo-service-2:
+    image: julius/prometheus-demo-service:latest
+    ports:
+    - '0.0.0.0:10002:10002'
+    command:
+    - -listen-address=:10002
+  node-exporter:
+    image: prom/node-exporter:latest
+    ports:
+    - 0.0.0.0:9100:9100
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+  cadvisor:
+    image: gcr.io/google-containers/cadvisor:v0.35.0
+    ports:
+    - 0.0.0.0:8080:8080
+    volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+    - /dev/disk/:/dev/disk:ro
