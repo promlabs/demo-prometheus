@@ -49,3 +49,17 @@ services:
     - /sys:/sys:ro
     - /var/lib/docker/:/var/lib/docker:ro
     - /dev/disk/:/dev/disk:ro
+  caddy:
+    image: caddy:2.0.0-rc.3
+    ports:
+    - 443:443
+    - 80:80
+    command:
+    - caddy
+    - reverse-proxy
+    - --from
+    - demo.promlabs.com
+    - --to
+    - localhost:9090
+    # volumes:
+    # - ./caddy/Caddyfile:/etc/caddy/Caddyfile
