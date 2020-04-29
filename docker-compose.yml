@@ -60,6 +60,6 @@ services:
     - --from
     - demo.promlabs.com
     - --to
-    - localhost:9090
+    - http://prometheus:9090
     # volumes:
     # - ./caddy/Caddyfile:/etc/caddy/Caddyfile
