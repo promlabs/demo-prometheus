@@ -41,6 +41,9 @@ services:
       - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
   cadvisor:
     image: gcr.io/google-containers/cadvisor:v0.35.0
+    privileged: true
+    devices:
+    - /dev/kmsg
     ports:
     - 0.0.0.0:8080:8080
     volumes:
@@ -50,7 +53,7 @@ services:
     - /var/lib/docker/:/var/lib/docker:ro
     - /dev/disk/:/dev/disk:ro
   caddy:
-    image: caddy:2.0.0-rc.3
+    image: caddy:2.1.1
     ports:
     - 443:443
     - 80:80
