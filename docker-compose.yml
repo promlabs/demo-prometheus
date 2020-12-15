@@ -52,6 +52,12 @@ services:
     - /sys:/sys:ro
     - /var/lib/docker/:/var/lib/docker:ro
     - /dev/disk/:/dev/disk:ro
+  docker-hub-exporter:
+     image: infinityworks/docker-hub-exporter
+     ports:
+       - 9170:9170
+     environment:
+       - "IMAGES=promlabs/promlens"
   caddy:
     image: caddy:2.1.1
     ports:
