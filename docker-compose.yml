@@ -6,8 +6,10 @@ services:
     - '0.0.0.0:9090:9090'
     command:
     - --config.file=/etc/prometheus/prometheus.yml
+    - --storage.tsdb.retention=9360h
     volumes:
     - ./prometheus:/etc/prometheus
+    - prometheus-data:/prometheus
   demo-service-0:
     image: julius/prometheus-demo-service:latest
     ports:
@@ -72,3 +74,5 @@ services:
     - http://prometheus:9090
     # volumes:
     # - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+volumes:
+  prometheus-data:
