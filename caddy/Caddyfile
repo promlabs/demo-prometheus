@@ -1,0 +1,7 @@
+demo.promlabs.com
+
+@prometheus {
+  path *
+  not path /api/v1/read
+}
+reverse_proxy @prometheus http://localhost:9090
