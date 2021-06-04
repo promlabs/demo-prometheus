@@ -66,14 +66,9 @@ services:
     ports:
     - 443:443
     - 80:80
-    command:
-    - caddy
-    - reverse-proxy
-    - --from
-    - demo.promlabs.com
-    - --to
-    - http://prometheus:9090
-    # volumes:
-    # - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+    volumes:
+    - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+    - caddy-data:/data
 volumes:
   prometheus-data:
+  caddy-data:
