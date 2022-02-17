@@ -12,19 +12,19 @@ services:
     - ./prometheus:/etc/prometheus
     - prometheus-data:/prometheus
   demo-service-0:
-    image: julius/prometheus-demo-service:latest
+    image: julius/prometheus-demo-service:0.10.0
     ports:
     - '0.0.0.0:10000:10000'
     command:
     - -listen-address=:10000
   demo-service-1:
-    image: julius/prometheus-demo-service:latest
+    image: julius/prometheus-demo-service:0.10.0
     ports:
     - '0.0.0.0:10001:10001'
     command:
     - -listen-address=:10001
   demo-service-2:
-    image: julius/prometheus-demo-service:latest
+    image: julius/prometheus-demo-service:0.10.0
     ports:
     - '0.0.0.0:10002:10002'
     command:
