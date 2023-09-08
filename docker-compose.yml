@@ -1,38 +1,38 @@
 version: '3.2'
 services:
   prometheus:
-    image: prom/prometheus:v2.44.0
+    image: prom/prometheus:v2.47.0
     ports:
-    - '0.0.0.0:9090:9090'
+      - '0.0.0.0:9090:9090'
     command:
-    - --config.file=/etc/prometheus/prometheus.yml
-    - --storage.tsdb.retention=9360h
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention=9360h
     volumes:
-    - ./prometheus:/etc/prometheus
-    - prometheus-data:/prometheus
+      - ./prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
     restart: on-failure
   demo-service-0:
-    image: julius/prometheus-demo-service:0.10.0
+    image: julius/prometheus-demo-service:0.11.1
     ports:
-    - '0.0.0.0:10000:10000'
+      - '0.0.0.0:10000:10000'
     command:
-    - -listen-address=:10000
+      - -listen-address=:10000
   demo-service-1:
-    image: julius/prometheus-demo-service:0.10.0
+    image: julius/prometheus-demo-service:0.11.1
     ports:
-    - '0.0.0.0:10001:10001'
+      - '0.0.0.0:10001:10001'
     command:
-    - -listen-address=:10001
+      - -listen-address=:10001
   demo-service-2:
-    image: julius/prometheus-demo-service:0.10.0
+    image: julius/prometheus-demo-service:0.11.1
     ports:
-    - '0.0.0.0:10002:10002'
+      - '0.0.0.0:10002:10002'
     command:
-    - -listen-address=:10002
+      - -listen-address=:10002
   node-exporter:
-    image: prom/node-exporter:v1.5.0
+    image: prom/node-exporter:v1.6.1
     ports:
-    - 0.0.0.0:9100:9100
+      - 0.0.0.0:9100:9100
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
@@ -46,29 +46,23 @@ services:
     image: gcr.io/google-containers/cadvisor:v0.36.0
     privileged: true
     devices:
-    - /dev/kmsg
+      - /dev/kmsg
     ports:
-    - 0.0.0.0:8080:8080
+      - 0.0.0.0:8080:8080
     volumes:
-    - /:/rootfs:ro
-    - /var/run:/var/run:ro
-    - /sys:/sys:ro
-    - /var/lib/docker/:/var/lib/docker:ro
-    - /dev/disk/:/dev/disk:ro
-  docker-hub-exporter:
-     image: infinityworks/docker-hub-exporter
-     ports:
-       - 9170:9170
-     environment:
-       - "IMAGES=promlabs/promlens"
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
   caddy:
-    image: caddy:2.6.4
+    image: caddy:2.7.4
     ports:
-    - 443:443
-    - 80:80
+      - 443:443
+      - 80:80
     volumes:
-    - ./caddy/Caddyfile:/etc/caddy/Caddyfile
-    - caddy-data:/data
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy-data:/data
 volumes:
   prometheus-data:
   caddy-data:
