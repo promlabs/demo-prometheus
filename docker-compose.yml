@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   prometheus:
-    image: prom/prometheus:v2.47.0
+    image: prom/prometheus:v2.48.0
     ports:
       - '0.0.0.0:9090:9090'
     command:
@@ -30,7 +30,7 @@ services:
     command:
       - -listen-address=:10002
   node-exporter:
-    image: prom/node-exporter:v1.6.1
+    image: prom/node-exporter:v1.7.0
     ports:
       - 0.0.0.0:9100:9100
     volumes:
@@ -43,7 +43,7 @@ services:
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
   cadvisor:
-    image: gcr.io/google-containers/cadvisor:v0.36.0
+    image: gcr.io/cadvisor/cadvisor:v0.47.2
     privileged: true
     devices:
       - /dev/kmsg
