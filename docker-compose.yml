@@ -12,6 +12,15 @@ services:
       - ./prometheus:/etc/prometheus
       - prometheus-data:/prometheus
     restart: on-failure
+  alertmanager:
+    image: prom/alertmanager:v0.27.0
+    ports:
+      - '0.0.0.0:9093:9093'
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yml
+    volumes:
+      - ./alertmanager:/etc/alertmanager
+    restart: on-failure
   demo-service-0:
     image: julius/prometheus-demo-service:0.11.1
     ports:
