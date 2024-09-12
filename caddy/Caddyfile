@@ -6,7 +6,6 @@ demo.promlabs.com
 }
 reverse_proxy @prometheus http://prometheus:9090
 
-@alertmanager {
-  path /alertmanager/*
+handle_path /alertmanager/* {
+  reverse_proxy http://alertmanager:9093
 }
-reverse_proxy @alertmanager http://alertmanager:9093
