@@ -6,7 +6,7 @@ services:
       - '0.0.0.0:9090:9090'
     command:
       - --config.file=/etc/prometheus/prometheus.yml
-      - --storage.tsdb.retention=9360h
+      - --storage.tsdb.retention.time=9360h
       - --enable-feature=promql-experimental-functions
     volumes:
       - ./prometheus:/etc/prometheus
