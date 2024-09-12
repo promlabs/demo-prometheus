@@ -2,11 +2,11 @@ demo.promlabs.com
 
 @prometheus {
   not path /api/v1/read
-  not path /alertmanager
+  not path /alertmanager/*
 }
 reverse_proxy @prometheus http://prometheus:9090
 
 @alertmanager {
-  path /alertmanager
+  path /alertmanager/*
 }
 reverse_proxy @alertmanager http://alertmanager:9093
