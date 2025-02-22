@@ -7,7 +7,7 @@ services:
     command:
       - --config.file=/etc/prometheus/prometheus.yml
       - --storage.tsdb.retention.time=9360h
-      - --enable-feature=promql-experimental-functions,old-ui
+      - --enable-feature=promql-experimental-functions
     volumes:
       - ./prometheus:/etc/prometheus
       - prometheus-data:/prometheus
